@@ -31,17 +31,32 @@ randomize.addEventListener('click', result);
 
 function result() {
 
+  let newStory = storyText;
+
+  let xItem = randomValueFromArray(insertX);
+  let yItem = randomValueFromArray(insertY);
+  let zItem = randomValueFromArray(insertZ);
+
+  newStory
+    = newStory.replace(':insertx:', xItem)
+              .replace(':inserty:', yItem)
+              .replace(':insertz:', zItem)
+              .replace(':insertx:', xItem);
+
   if(customName.value !== '') {
     let name = customName.value;
-
+    newStory = newStory.replace('Bob', name);
   }
 
   if(document.getElementById("uk").checked) {
-    let weight = Math.round(300);
-    let temperature =  Math.round(94);
+    let weight = Math.round(300 / 14) + 'stone';
+    let temperature =  Math.round(94- 32) * 5 / 9 + 'centigrade';
 
+    newStory = newStory
+            .replace('94 fahrenheit', temperature)
+            .replace('300 pounds', weight);
   }
 
-  story.textContent = ;
+  story.textContent = newStory;
   story.style.visibility = 'visible';
 }
